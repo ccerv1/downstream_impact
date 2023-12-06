@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Dowstream Impact: Optimism</title>
+    <h1 id="mainTitle" style="font-size: 2em;">Downstream Impact</h1>
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
@@ -44,12 +44,15 @@
         google.charts.setOnLoadCallback(drawChart);
       
         function drawChart() {
-          var colors = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f',
-                        '#cab2d6', '#ffff99', '#1f78b4', '#33a02c'];
-          var height = window.innerHeight * 0.7;
+          var colors = ['#FF0420', '#FF6969', '#FFCCDD'];          
           var width = window.innerWidth- 50;
+          var fixedHeight = window.innerHeight * 0.7;
+          var baseHeight = 400;
+          var rowHeight = 45;
+          var dynamicHeight = Math.max(baseHeight, rows.length * rowHeight);
+
           var options = {
-            height: height,
+            height: dynamicHeight,
             width: width,
             sankey: {
               node: {
@@ -62,8 +65,15 @@
             }
           };
 
+          var chartTitle = document.getElementById('chartTitle');
+          if (displayMode === 'devs') {
+            chartTitle.textContent = 'Downstream Impact: Active Developers';
+          } else {
+            chartTitle.textContent = 'Downstream Impact: Sequencer Fees';
+          }
+
           var sankeyElement = document.getElementById('sankey_basic');
-          sankeyElement.style.height = height + 'px';
+          sankeyElement.style.height = dynamicHeight + 'px';
           sankeyElement.style.width = width + 'px';
         
           var data = new google.visualization.DataTable();
@@ -88,7 +98,7 @@
     </script>
   </head>
 
-  <body style="font-family: PT Serif,sans-serif; background: rgb(255,255,255); background: linear-gradient(-4deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 90%, rgba(147,243,231,1) 100%);">
+  <body style="font-family: PT Serif,sans-serif; background: rgb(255,255,255); background: linear-gradient(-4deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 90%, rgba(255,4,32,.25) 100%);">
   
     <img src="img/logo.png" style="max-width: 150px; vertical-align:middle; ">
     <h1 style="font-size: 2em;">Downstream Impact</h1>
