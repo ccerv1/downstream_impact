@@ -46,13 +46,13 @@
           var padding = 20;
           var colors = ['#FF0420', '#FF6969', '#FFCCDD'];          
           var width = window.innerWidth - padding;
-          var fixedHeight = window.innerHeight * 0.7;
+          var fixedHeight = window.innerHeight;// * 0.7;
           var baseHeight = 400;
           var rowHeight = .5;
           var dynamicHeight = Math.max(baseHeight, rows.length * rowHeight) + padding;
 
           var options = {
-            height: dynamicHeight,
+            height: fixedHeight,
             width: width,
             sankey: {
               node: {
@@ -73,7 +73,7 @@
           }
 
           var sankeyElement = document.getElementById('sankey_basic');
-          sankeyElement.style.height = dynamicHeight + 'px';
+          sankeyElement.style.height = fixedHeight + 'px';
           sankeyElement.style.width = width + 'px';
         
           var data = new google.visualization.DataTable();
@@ -84,9 +84,11 @@
 
           for (var i = 1; i < rows.length; i++) {
               var split_row = rows[i].split(',');
-              var value = displayMode === 'devs' ? parseFloat(split_row[2]) : parseFloat(split_row[3]);
+              var value = displayMode === 'fees' ? parseFloat(split_row[2]) : parseFloat(split_row[3]);
 
-              if (split_row[0] && split_row[1] && value > 0) {
+              if (displayMode === 'fees' && value >= .1) {
+                  data.addRow([split_row[0], split_row[1], {v: value, f: value.toLocaleString()}]);
+              } else if (displayMode === 'devs' && value >= 1) {
                   data.addRow([split_row[0], split_row[1], {v: value, f: value.toLocaleString()}]);
               }
           }
