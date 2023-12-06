@@ -44,7 +44,7 @@
       
         function drawChart() {
           var padding = 20;
-          var colors = ['#FF0420', '#FF6969', '#FFCCDD'];          
+          var colors = ['#FF0420'];          
           var width = window.innerWidth - padding;
           var fixedHeight = window.innerHeight;// * 0.7;
           var baseHeight = 400;
@@ -56,20 +56,20 @@
             width: width,
             sankey: {
               node: {
-                //colors: colors
+                //colors:  ['#FF0420']
               },
               link: {
                 //colorMode: 'gradient',
-                //colors: colors
+                colors: ['#FFCCDD']
               }
             }
           };
 
-          var chartTitle = document.getElementById('mainTitle');
+          var subtitle = document.getElementById('subtitle');
           if (displayMode === 'devs') {
-            chartTitle.textContent = 'Downstream Impact: Active Developers';
+            subtitle.textContent = 'Active Developers';
           } else {
-            chartTitle.textContent = 'Downstream Impact: Sequencer Fees';
+            subtitle.textContent = 'Sequencer Fees (OP Mainnet only) - ETH';
           }
 
           var sankeyElement = document.getElementById('sankey_basic');
@@ -104,20 +104,20 @@
 
   <body style="font-family: PT Serif,sans-serif; background: rgb(255,255,255); background: linear-gradient(-4deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 90%, rgba(255,4,32,.25) 100%);">
   
-    <img src="img/logo.png" style="max-width: 150px; vertical-align:middle; ">
-    <h1 id="mainTitle" style="font-size: 2em;">Downstream Impact</h1>
+    <img src="img/logo.png" style="max-width: 100px; vertical-align:middle; ">
+    <h1 style="font-size: 2em;">Downstream Impact</h1>
     <div>
       A visual overview of the downstream impact of dependencies on the health of open source ecosystems powered by <a href="https://www.opensource.observer">Open Source Observer</a>.  
     </div>
-    <br>
-    <br>
     <div>
-      <a href="#" onclick="document.location=baseUrl() + '?mode=devs';">Show Devs</a>
-      <a href="#" onclick="document.location=baseUrl() + '?mode=fees';">Show Fees</a>
+      <h2 id=subtitle>""</h1>
+      <a href="#" onclick="document.location=baseUrl() + '?mode=devs';">Active Developers</a>
+      |
+      <a href="#" onclick="document.location=baseUrl() + '?mode=fees';">Sequencer Fees</a>
     </div>
     <div id=title>
-      <h2 style="width:49%; display: inline-block;">Dependent</h2>
-      <h2 style="width:50%; display: inline-block; text-align: right;">Dependency</h2>
+      <h3 style="width:49%; display: inline-block;">Dependent</h2>
+      <h3 style="width:50%; display: inline-block; text-align: right;">Dependency</h2>
     </div>    
     <div id="sankey_basic"></div>
   </body>
