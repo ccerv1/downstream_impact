@@ -1,9 +1,9 @@
-# Practical Pluraism: Funding for Ethereum 2023
+# Downstream Impact: tracing the impact of repo dependencies on developers and transaction fees
 
-A visual overview of the flows of funding through many public goods funding sources + mechanisms to projects.  For the Ethereum ecosystem 2023.
+A visual overview of the downstream impact of dependencies on the health of open source ecosystems.
 
-Built for the Zuzalu Hackathon. https://dorahacks.io/hackathon/hackzuzaluist/detail
+Powered by [Open Source Observer](https://www.opensource.observer)
 
-View it at https://practicalpluralism.github.io
+View it at https://cerv1.github.io/downstream_impact
 
-Join the telegram for this project: https://t.me/+nQU6E_Cvo5ZlNmNh
+Join the OSO telegram if you like this and want to see mooooor: https://t.me/osocommunity
