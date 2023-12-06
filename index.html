@@ -1,6 +1,5 @@
 <html>
   <head>
-    <h1 id="mainTitle" style="font-size: 2em;">Downstream Impact</h1>
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
@@ -44,28 +43,29 @@
         google.charts.setOnLoadCallback(drawChart);
       
         function drawChart() {
+          var padding = 20;
           var colors = ['#FF0420', '#FF6969', '#FFCCDD'];          
-          var width = window.innerWidth- 50;
+          var width = window.innerWidth - padding;
           var fixedHeight = window.innerHeight * 0.7;
           var baseHeight = 400;
-          var rowHeight = 45;
-          var dynamicHeight = Math.max(baseHeight, rows.length * rowHeight);
+          var rowHeight = 2;
+          var dynamicHeight = Math.max(baseHeight, rows.length * rowHeight) + padding;
 
           var options = {
             height: dynamicHeight,
             width: width,
             sankey: {
               node: {
-                colors: colors
+                //colors: colors
               },
               link: {
-                colorMode: 'gradient',
-                colors: colors
+                //colorMode: 'gradient',
+                //colors: colors
               }
             }
           };
 
-          var chartTitle = document.getElementById('chartTitle');
+          var chartTitle = document.getElementById('mainTitle');
           if (displayMode === 'devs') {
             chartTitle.textContent = 'Downstream Impact: Active Developers';
           } else {
@@ -81,13 +81,16 @@
           data.addColumn('string', 'Dependent');
           data.addColumn('number', displayMode === 'devs' ? 'Devs' : 'Fees');
           var new_rows = [];
-          for(var i = 1; i < rows.length; i++){
+
+          for (var i = 1; i < rows.length; i++) {
               var split_row = rows[i].split(',');
               var value = displayMode === 'devs' ? parseFloat(split_row[2]) : parseFloat(split_row[3]);
-              if(split_row[0] && split_row[1] && value > 0){
+
+              // Filter out rows where value is 0
+              if (split_row[0] && split_row[1] && value > 0) {
                   new_rows.push([split_row[0], split_row[1], value]);
               }
-          };
+          }
 
           data.addRows(new_rows);
           var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
@@ -101,28 +104,20 @@
   <body style="font-family: PT Serif,sans-serif; background: rgb(255,255,255); background: linear-gradient(-4deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 90%, rgba(255,4,32,.25) 100%);">
   
     <img src="img/logo.png" style="max-width: 150px; vertical-align:middle; ">
-    <h1 style="font-size: 2em;">Downstream Impact</h1>
-    <h2>Tracing the impact of repo dependencies on developers and transaction fees</h2>
+    <h1 id="mainTitle" style="font-size: 2em;">Downstream Impact</h1>
+    <div>
+      A visual overview of the downstream impact of dependencies on the health of open source ecosystems powered by <a href="https://www.opensource.observer">Open Source Observer</a>.  
+    </div>
+    <br>
+    <br>
     <div>
       <a href="#" onclick="document.location=baseUrl() + '?mode=devs';">Show Devs</a>
       <a href="#" onclick="document.location=baseUrl() + '?mode=fees';">Show Fees</a>
     </div>
-     
     <div id=title>
       <h2 style="width:49%; display: inline-block;">Dependent</h2>
       <h2 style="width:50%; display: inline-block; text-align: right;">Dependency</h2>
-    </div>
-    
+    </div>    
     <div id="sankey_basic"></div>
-    
-    <div>
-      <h2>What is this?</h2>
-      <div>
-        <br>
-        This is a visual overview of the downstream impact of dependencies on the health of open source ecosystems.
-        This is a visualization powered by <a href="https://www.opensource.observer">Open Source Observer</a>.  
-        <br>
-      </div>
-    </div>
   </body>
 </html>
