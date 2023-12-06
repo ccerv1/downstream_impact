@@ -45,7 +45,7 @@
       var showprojects = urlParams().get('showprojects') == 1;
       var scaledown = urlParams().get('scaledown')  == 1;
 
-      var rows = await fetchAndParseCSVToArray('https://practicalpluralism.github.io/data.csv');
+      var rows = await fetchAndParseCSVToArray('https://ccerv1.github.io/downstream_impact/data.csv');
       google.charts.load('current', {'packages':['sankey']});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
