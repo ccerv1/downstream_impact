@@ -86,9 +86,8 @@
               var split_row = rows[i].split(',');
               var value = displayMode === 'devs' ? parseFloat(split_row[2]) : parseFloat(split_row[3]);
 
-              // Filter out rows where value is 0
               if (split_row[0] && split_row[1] && value > 0) {
-                  new_rows.push([split_row[0], split_row[1], value]);
+                  data.addRow([split_row[0], split_row[1], {v: value, f: value.toLocaleString()}]);
               }
           }
 
