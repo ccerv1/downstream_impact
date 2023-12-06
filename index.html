@@ -92,14 +92,14 @@
             document.getElementById("showprojects_on").style.fontWeight='bold';
         }
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'From');
-        data.addColumn('string', 'To');
-        data.addColumn('number', 'Weight');
+        data.addColumn('string', 'Dependency');
+        data.addColumn('string', 'Dependent');
+        data.addColumn('number', 'Fees');
         var new_rows = []
         for(var i=1; i<rows.length; i++){
           var split_row = rows[i].split(',');
           if(split_row[0] && split_row[1] && split_row[2]){
-            var include = split_row[3] != 'column_3' || showprojects;
+            var include = split_row[3] != 'Devs' || showprojects;
             console.log(split_row[4]);
             if(split_row[4] && split_row[4] == 'Include?  This is mostly for DAO ecosystems not ETH public goods'){
                 include = false;
